@@ -15,7 +15,7 @@ function App() {
         )
       );
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      setCartItems([...cartItems, { ...product, qty: + 1 }]);
     }
   };
   const onRemove = (product) => {
@@ -30,9 +30,18 @@ function App() {
       );
     }
   };
+
+  const itemCount = cartItems.map((x) => {
+    return x.qty
+  }).reduce((a, b) => {
+    return a + b;
+  }, 0)
+
+  console.log('itemCount', itemCount)
+
   return (
     <div className="App">
-      <Header countCartItems={cartItems.length}></Header>
+      <Header countCartItems={itemCount}></Header>
       <div className="row">
         <Main products={products} onAdd={onAdd}></Main>
         <Cart
